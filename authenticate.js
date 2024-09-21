@@ -3,14 +3,14 @@ const readline = require('readline');
 const {google} = require('googleapis');
 
 // If modifying these scopes, delete token.json.
-const SCOPES = ['https://www.googleapis.com/auth/tasks.readonly'];
+const SCOPES = ['https://www.googleapis.com/auth/keep.readonly'];
 const TOKEN_PATH = 'token.json';
 
 // Load client secrets from a local file.
 fs.readFile('credentials.json', (err, content) => {
   if (err) return console.log('Error loading client secret file:', err);
   // Authorize a client with credentials, then call the Google Slides API.
-  authorize(JSON.parse(content), listTaskLists);
+  authorize(JSON.parse(content), listKeepLists);
 });
 
 /**
@@ -68,20 +68,20 @@ function getNewToken(oAuth2Client, callback) {
  *
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
-function listTaskLists(auth) {
-  const service = google.tasks({version: 'v1', auth});
-  service.tasklists.list({
+function listKeepLists(auth) {
+  const service = google.keep({version: 'v1', auth});
+  service.keeplists.list({
     maxResults: 10,
   }, (err, res) => {
     if (err) return console.error('The API returned an error: ' + err);
-    const taskLists = res.data.items;
-    if (taskLists) {
-      console.log('Task lists:');
-      taskLists.forEach((taskList) => {
-        console.log(`${taskList.title} (${taskList.id})`);
+    const keepLists = res.data.items;
+    if (keepLists) {
+      console.log('Keep lists:');
+      keepLists.forEach((keepList) => {
+        console.log(`${keepList.title} (${keepList.id})`);
       });
     } else {
-      console.log('No task lists found.');
+      console.log('No keep lists found.');
     }
   });
 }
