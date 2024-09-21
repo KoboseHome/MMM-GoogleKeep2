@@ -18,8 +18,8 @@ module.exports = NodeHelper.create({
             if(!this.service) {
                 this.authenticate();
             } else {
-                // Check if tasks service is already running, avoids running authentication twice
-                console.log("TASKS SERVICE ALREADY RUNNING, DONT NEED TO AUTHENTICATE AGAIN")
+                // Check if keep service is already running, avoids running authentication twice
+                console.log("KEEP SERVICE ALREADY RUNNING, DONT NEED TO AUTHENTICATE AGAIN")
                 this.sendSocketNotification("SERVICE_READY", {});
             }
         } else if (notification === "REQUEST_UPDATE") {
@@ -32,8 +32,8 @@ module.exports = NodeHelper.create({
 
         fs.readFile(self.path + '/credentials.json', (err, content) => {
             if (err) return console.log('Error loading client secret file:', err);
-            // Authorize a client with credentials, then call the Google Tasks API.
-            authorize(JSON.parse(content), self.startTasksService);
+            // Authorize a client with credentials, then call the Google Keep API.
+            authorize(JSON.parse(content), self.startKeepService);
           });
 
         function authorize(credentials, callback) {
@@ -50,8 +50,8 @@ module.exports = NodeHelper.create({
         }
     },
 
-    startTasksService: function(auth, self) {
-        self.service = google.tasks({version: 'v1', auth});
+    startKeepService: function(auth, self) {
+        self.service = google.keep({version: 'v1', auth});
         self.sendSocketNotification("SERVICE_READY", {});
     },
 
@@ -63,8 +63,8 @@ module.exports = NodeHelper.create({
             return;
         }
 
-        self.service.tasks.list({
-            tasklist: config.listID,
+        self.service.keep.list({
+            keeplist: config.listID,
             maxResults: config.maxResults,
             showCompleted: config.showCompleted,
             showHidden: config.showHidden,
@@ -73,14 +73,14 @@ module.exports = NodeHelper.create({
 
             // Testing
             /* 
-            const tasksList = res.data.items;
-            console.log(tasksList);
-            if (tasksList) {
-                tasksList.forEach((task) => {
+            const keepList = res.data.items;
+            console.log(keepList);
+            if (keepList) {
+                keepList.forEach((task) => {
                     console.log(task);
                 });
             } else {
-                console.log('No tasks found.');
+                console.log('No keep found.');
             }
              */
 
