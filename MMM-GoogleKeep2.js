@@ -1,11 +1,11 @@
-Module.register("MMM-GoogleTasks",{
+Module.register("MMM-GoogleKeep2",{
 	// Default module config.
 	defaults: {
 
 		listID: "", // List ID (see authenticate.js)
 		maxResults: 10,		
-		showCompleted: false, //set showCompleted and showHidden true
-		ordering: "myorder", // Order by due date or by 'my order' NOT IMPLEMENTED
+		//showCompleted: false, //set showCompleted and showHidden true
+		//ordering: "myorder", // Order by due date or by 'my order' NOT IMPLEMENTED
 		dateFormat: "MMM Do", // Format to display dates (moment.js formats)
 		updateInterval: 10000, // Time between content updates (millisconds)
 		animationSpeed: 2000, // Speed of the update animation (milliseconds)
@@ -27,7 +27,7 @@ Module.register("MMM-GoogleTasks",{
 
 	// Define required scripts.
 	getStyles: function () {
-		return ["font-awesome.css", "MMM-GoogleTasks.css"];
+		return ["font-awesome.css", "MMM-GoogleKeep2.css"];
 	},
 
 	// Define start sequence
