@@ -1,34 +1,34 @@
-  .MMM-GoogleTasks .container {
+  .MMM-GoogleKeep2 .container {
       display: grid;
       grid-template-columns: 1fr auto;
       transform: translateY(-.6em);
   }
 
-  .MMM-GoogleTasks .item {
+  .MMM-GoogleKeep2 .item {
       text-align: left;
       padding-bottom: .25em;
       }
 
-  /* .MMM-GoogleTasks .item.title {
+  /* .MMM-GoogleKeep2 .item.title {
   } */
 
-  .MMM-GoogleTasks .item.date {
+  .MMM-GoogleKeep2 .item.date {
       padding-left: 1.7em;
       text-align: right;
   }
 
-  .MMM-GoogleTasks .item.notes {
+  .MMM-GoogleKeep2 .item.notes {
       padding-left: .95em;
       font-size: 0.8em;
       padding-bottom: 0;
   }
 
-  .MMM-GoogleTasks .item.child {
+  .MMM-GoogleKeep2 .item.child {
       text-align: left;
       padding-left: 1.5em;
   }
 
-  .MMM-GoogleTasks .fa  {
+  .MMM-GoogleKeep2 .fa  {
     vertical-align: middle;
     padding-bottom: .25em;
     padding-right: .25em;
