@@ -56,22 +56,19 @@ module.exports = NodeHelper.create({
     },
 
     getList: function(config) {
-        var self = this;
+    var self = this;
 
-        if(!self.service) {
-            console.log("Refresh required"); 
-            return;
-        }
+    if (!self.service) {
+        console.log("Refresh required");
+        return;
+    }
 
-        self.service.keep.list({
-            keeplist: config.listID,
-            maxResults: config.maxResults,
-            showCompleted: config.showCompleted,
-            showHidden: config.showHidden,
-        }, (err, res) => {
-            if (err) return console.error('The API returned an error: ' + err);
-
-            // Testing
+    self.service.notes.list({
+        pageSize: config.maxResults,
+    }, (err, res) => {
+        if (err) return console.error('The API returned an error: ' + err);
+           
+        // Testing
             /* 
             const keepList = res.data.items;
             console.log(keepList);
@@ -83,9 +80,12 @@ module.exports = NodeHelper.create({
                 console.log('No keep found.');
             }
              */
+        
+        var payload = { items: res.data.notes };
+        self.sendSocketNotification("UPDATE_DATA", payload);
+    });
+},
 
-            var payload = {id: config.listID, items: res.data.items};
-            self.sendSocketNotification("UPDATE_DATA", payload);
-        });
+
     },
 });
