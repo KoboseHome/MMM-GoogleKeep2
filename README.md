@@ -1,29 +1,28 @@
-# MMM-GoogleTasks
+## MMM-GoogleKeepAI
 
 Module for the [MagicMirror²](https://github.com/MichMich/MagicMirror/) smart mirror.
 
-Displays tasks from Google Tasks App
-
+Displays notes from Google Keep.
 
 ### Example
-![Example of MMM-GoogleTasks](images/sample.png?raw=true "Example screenshot")
+![Example of MMM-GoogleKeepAI](images/sample.png?raw=true "Example screenshot")
 
 ### Dependencies
-1. The [Google Node.js client library](https://github.com/google/google-api-nodejs-client/): For authentication and Google Tasks API (v1). See Installation for instructions
+1. The [Google Node.js client library](https://github.com/google/google-api-nodejs-client/): For authentication and Google Keep API (v1). See Installation for instructions
 
 ## Installation
 To install the module, use your terminal to:
 1. Navigate to your MagicMirror's modules folder. If you are using the default installation directory, use the command:<br />`cd ~/MagicMirror/modules`
-2. Clone the module:<br />`git clone https://github.com/jgauth/MMM-GoogleTasks.git`
+2. Clone the module:<br />`git clone https://github.com/yourusername/MMM-GoogleKeepAI.git`
 3. Install Google API:<br />`npm install googleapis`
 
 ## Authentication Setup
-Google Tasks API an authenticated OAuth2 client:
-1. Go [here](https://developers.google.com/tasks/quickstart/nodejs), and click "Enable the Google Tasks API" button. Follow the steps to download the credentials.json file. 
-2. Move credentials.json to your MMM-GoogleTasks directory (MagicMirror/modules/MMM-GoogleTasks/)
-3. [Enable Google Tasks API](https://console.cloud.google.com/apis/library/tasks.googleapis.com). Select the same project as in step 1.
+Google Keep API requires an authenticated OAuth2 client:
+1. Go [here](https://developers.google.com/keep/quickstart/nodejs), and click "Enable the Google Keep API" button. Follow the steps to download the credentials.json file.
+2. Move credentials.json to your MMM-GoogleKeepAI directory (MagicMirror/modules/MMM-GoogleKeepAI/)
+3. [Enable Google Keep API](https://console.cloud.google.com/apis/library/keep.googleapis.com). Select the same project as in step 1.
 4. Run authenticate.js:<br />`node authenticate.js`
-5. Follow the instructions and it should print your lists. Copy the ID of the list you want to the config listID
+5. Follow the instructions and it should print your notes. Copy the ID of the list you want to the config listID
 
 ## Using the module
 
@@ -35,13 +34,16 @@ var config = {
     modules: [
         ...
         {
-            module: 'MMM-GoogleTasks',
-            header: "Google Tasks",
-            position: "top_left",
+            module: 'MMM-GoogleKeepAI',
+            header: "Google Keep",
+            position: "top_right",
             config: {
                 listID: "",
-                ...
-                // See below for Configuration Options
+                maxResults: 10,
+                dateFormat: "MMM Do",
+                updateInterval: 10000,
+                animationSpeed: 2000,
+                tableClass: "small",
             }
         },
         ...
